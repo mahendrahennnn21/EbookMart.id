@@ -1,23 +1,137 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EbookMart.id</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EbookMart.id - Jual eBook Digital</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
-    .ebook { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 10px; background: white; }
-    button { background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 5px; }
-    button:hover { background: #0056b3; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    .ebook-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .ebook {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      background-color: #fafafa;
+    }
+    .ebook h3 {
+      margin: 0.5rem 0;
+    }
+    .ebook button {
+      background-color: #1e90ff;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background-color: #1e90ff;
+      color: white;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>📚 Toko eBook Saya</h1>
-
-  <div class="ebook">
-    <h2>Ebook 1: Ayo Belajar</h2>
-    <p>Harga: Rp20.000</p>
-    <a href="https://linktr.ee/kamuebook"><button>Beli Sekarang</button></a>
-  </div>
-</body>
-</html>
+  <header>
+    <h1>EbookMart.id</h1>
+    <p>Situs Jual eBook Digital Terperc<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EbookMart.id - Jual eBook Digital</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+    .ebook-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .ebook {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      background-color: #fafafa;
+    }
+    .ebook h3 {
+      margin: 0.5rem 0;
+    }
+    .ebook button {
+      background-color: #1e90ff;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background-color: #1e90ff;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EbookMart.id</h1>
+    <p>Situs Jual eBook Digital Terperc
