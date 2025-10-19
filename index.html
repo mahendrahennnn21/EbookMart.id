@@ -1,409 +1,610 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EbookMart.id - Jual Ebook Digital Terpercaya!</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f9f9f9;
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #2b6cb0, #1a4d8f);
-            color: white;
-            text-align: center;
-            padding: 25px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 5px;
-        }
-        
-        header p {
-            margin-top: 10px;
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        
-        /* Navbar */
-        nav {
-            background: #1a4d8f;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px 20px;
-        }
-        
-        .logo {
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        
-        /* Hamburger */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 22px;
-            cursor: pointer;
-            padding: 5px;
-            position: relative;
-            z-index: 101;
-        }
-        
-        .mobile-menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: white;
-            border-radius: 2px;
-            transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-            transform-origin: center;
-        }
-        
-        /* Animasi hamburger jadi X yang lebih smooth */
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-            background: #ff6b6b;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-            background: #ff6b6b;
-        }
-        
-        /* Efek hover pada hamburger */
-        .mobile-menu-toggle:hover span {
-            background: #ffd93d;
-        }
-        
-        .mobile-menu-toggle.active:hover span {
-            background: #ff6b6b;
-        }
-        
-        /* Nav links */
-        .nav-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-        
-        .nav-links a:hover::before {
-            left: 0;
-        }
-        
-        .nav-links a:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #1a4d8f;
-                overflow: hidden;
-                max-height: 0;
-                transition: max-height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
-            
-            .nav-links a {
-                margin: 0;
-                padding: 15px 20px;
-                text-align: center;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                transform: translateY(-10px);
-                opacity: 0;
-                transition: all 0.4s ease;
-            }
-            
-            .nav-links.active {
-                max-height: 500px;
-            }
-            
-            .nav-links.active a {
-                transform: translateY(0);
-                opacity: 1;
-                transition-delay: calc(0.05s * var(--i));
-            }
-        }
-        
-        /* Section */
-        section {
-            padding: 40px 20px;
-        }
-        
-        section h2 {
-            text-align: center;
-            color: #1a4d8f;
-            font-size: 28px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        section h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: #2b6cb0;
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Product Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .product-image {
-            height: 150px;
-            background: linear-gradient(135deg, #2b6cb0, #1a4d8f);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 48px;
-        }
-        
-        .product-info {
-            padding: 15px;
-        }
-        
-        .product-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #1a4d8f;
-        }
-        
-        .product-description {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        
-        .product-price {
-            font-weight: bold;
-            color: #1a4d8f;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #2b6cb0;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-        }
-        
-        .btn:hover {
-            background: #1a4d8f;
-            transform: translateY(-2px);
-        }
-        
-        /* Footer */
-        footer {
-            background: #1a4d8f;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            margin-top: 50px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .copyright {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>📚 EbookMart.id</h1>
-        <p>Situs Jual Ebook Digital Terpercaya</p>
-    </header>
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>EbookMart.id - Jual Ebook Digital Terpercaya!</title>  
+  <style> 
+    /* Tombol awalnya tidak muncul di layar besar */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Untuk layar kecil (HP) */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block; /* tombol ☰ muncul */
+  }
+
+  .nav-links {
+    display: none; /* menu disembunyikan */
+    flex-direction: column;
+    width: 100%;
+    background: #1a4d8f;
+    position: absolute;
+    top: 60px; /* di bawah navbar */
+    left: 0;
+    padding: 10px 0;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  /* Menu muncul saat tombol diklik */
+  .nav-links.active {
+    display: flex;
+  }
+}
+    /* === Category List (tampilan kategori populer) === */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.category-item {
+  background: white;
+  border-radius: 10px;
+  flex: 1 1 250px;
+  max-width: 250px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.category-item .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #2b6cb0;
+}
+
+.category-item h3 {
+  color: #1a4d8f;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+    /* Reset dan Base Styles */  
+    * {  
+      box-sizing: border-box;  
+      margin: 0;  
+      padding: 0;  
+    }  
+      
+    body {  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+      margin: 0;  
+      background: #f9f9f9;  
+      color: #333;  
+      line-height: 1.6;  
+    }  
+      
+    /* Header Styles */  
+    header {  
+      background: linear-gradient(135deg, #2b6cb0, #1a4d8f);  
+      color: white;  
+      padding: 25px 20px;  
+      text-align: center;  
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);  
+    }  
+      
+    header h1 {  
+      margin: 0;  
+      font-size: 32px;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      gap: 10px;  
+    }  
+      
+    header p {  
+      margin-top: 10px;  
+      font-size: 18px;  
+      opacity: 0.9;  
+    }  
+      
+    /* Navigation Styles */  
+    nav {  
+      background: #1a4d8f;  
+      padding: 15px;  
+      position: sticky;  
+      top: 0;  
+      z-index: 100;  
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);  
+    }  
+      
+    nav .container {  
+      max-width: 1200px;  
+      margin: 0 auto;  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+    }  
+      
+    nav .logo {  
+      font-weight: bold;  
+      font-size: 20px;  
+      color: white;  
+    }  
+      
+    nav .nav-links {  
+      display: flex;  
+    }  
+      
+    nav a {  
+      color: white;  
+      margin: 0 15px;  
+      text-decoration: none;  
+      font-weight: 500;  
+      transition: all 0.3s ease;  
+      padding: 5px 10px;  
+      border-radius: 4px;  
+      position: relative;
+    }  
+      
+    nav a:hover {  
+      background: rgba(255,255,255,0.1);  
+      text-decoration: none;  
+    }  
+      
+    /* Container */  
+    .container {  
+      max-width: 1200px;  
+      margin: 0 auto;  
+      padding: 0 20px;  
+    }  
+      
+    /* Section Styles */  
+    section {  
+      padding: 40px 20px;  
+    }  
+      
+    section h2 {  
+      text-align: center;  
+      margin-bottom: 30px;  
+      color: #1a4d8f;  
+      font-size: 28px;  
+      position: relative;  
+    }  
+      
+    section h2::after {  
+      content: '';  
+      display: block;  
+      width: 80px;  
+      height: 4px;  
+      background: #2b6cb0;  
+      margin: 10px auto;  
+      border-radius: 2px;  
+    }  
+      
+    /* Product Grid */  
+    .products-grid {  
+      display: grid;  
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+      gap: 25px;  
+      margin-top: 20px;  
+    }  
+      
+    /* Product Card */  
+    .product {  
+      background: white;  
+      border-radius: 10px;  
+      overflow: hidden;  
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);  
+      transition: transform 0.3s ease, box-shadow 0.3s ease;  
+      display: flex;  
+      flex-direction: column;  
+      position: relative;
+    }  
+      
+    .product:hover {  
+      transform: translateY(-5px);  
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);  
+    }  
+      
+    .product-image {  
+      height: 180px;  
+      background: #e9f2fa;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      font-size: 60px;  
+      color: #2b6cb0;  
+    }  
+      
+    .product-content {  
+      padding: 20px;  
+      flex-grow: 1;  
+      display: flex;  
+      flex-direction: column;  
+    }  
+      
+    .product h3 {  
+      margin: 0 0 10px 0;  
+      font-size: 20px;  
+      color: #1a4d8f;  
+    }  
+      
+    .product p {  
+      margin-bottom: 15px;  
+      color: #666;  
+      flex-grow: 1;  
+    }  
+      
+    .product-price {  
+      font-size: 22px;  
+      font-weight: bold;  
+      color: #2b6cb0;  
+      margin-bottom: 15px;  
+    }  
+      
+    .product-old-price {  
+      font-size: 16px;  
+      color: #999;  
+      text-decoration: line-through;  
+      margin-right: 10px;  
+    }  
+      
+    .btn {  
+      display: inline-block;  
+      background: #2b6cb0;  
+      color: white;  
+      padding: 12px 20px;  
+      border: none;  
+      border-radius: 5px;  
+      cursor: pointer;  
+      font-weight: 600;  
+      text-align: center;  
+      transition: background 0.3s ease;  
+      text-decoration: none;  
+    }  
+      
+    .btn:hover {  
+      background: #1a4d8f;  
+    }  
+      
+    .btn-outline {  
+      background: transparent;  
+      border: 2px solid #2b6cb0;  
+      color: #2b6cb0;  
+    }  
+      
+    .btn-outline:hover {  
+      background: #2b6cb0;  
+      color: white;  
+    }
+
+    /* Wishlist Styles */
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 18px;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
     
-    <nav>
-        <div class="container">
-            <div class="logo">EbookMart</div>
-            <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="nav-links" id="navLinks">
-                <a href="#" style="--i: 1;">Beranda</a>
-                <a href="#" style="--i: 2;">Katalog</a>
-                <a href="#" style="--i: 3;">Kategori</a>
-                <a href="#" style="--i: 4;">Wishlist</a>
-                <a href="#" style="--i: 5;">Kontak</a>
-            </div>
-        </div>
-    </nav>
+    .wishlist-btn:hover {
+      transform: scale(1.1);
+    }
     
-    <section>
-        <div class="container">
-            <h2>Produk Terbaru</h2>
-            <p style="text-align:center;">Contoh produk ebook terbaru ditampilkan di sini.</p>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        📖
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Panduan Lengkap Web Development</h3>
-                        <p class="product-description">Pelajari cara membangun website modern dari dasar hingga mahir.</p>
-                        <div class="product-price">Rp 89.000</div>
-                        <a href="#" class="btn">Beli Sekarang</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        💼
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Strategi Bisnis Digital 2023</h3>
-                        <p class="product-description">Raih kesuksesan di era digital dengan strategi bisnis terkini.</p>
-                        <div class="product-price">Rp 75.000</div>
-                        <a href="#" class="btn">Beli Sekarang</a>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-image">
-                        ✍️
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Seni Menulis Kreatif</h3>
-                        <p class="product-description">Tingkatkan kemampuan menulis dengan teknik kreatif.</p>
-                        <div class="product-price">Rp 65.000</div>
-                        <a href="#" class="btn">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="footer-content">
-            <p>EbookMart.id - Situs Jual Ebook Digital Terpercaya</p>
-            <div class="copyright">
-                &copy; 2023 EbookMart.id. All rights reserved.
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navLinks = document.getElementById('navLinks');
+    .wishlist-btn.active {
+      color: #e53e3e;
+      background: #fed7d7;
+    }
+
+    .wishlist-counter {
+      background: #e53e3e;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+    }
+      
+    /* Footer Styles */  
+    footer {  
+      background: linear-gradient(135deg, #1a4d8f, #2b6cb0);  
+      color: white;  
+      text-align: center;  
+      padding: 30px 20px;  
+      margin-top: 40px;  
+    }  
+      
+    .footer-content {  
+      max-width: 1200px;  
+      margin: 0 auto;  
+      display: grid;  
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+      gap: 30px;  
+      text-align: left;  
+    }  
+      
+    .footer-section h3 {  
+      margin-bottom: 15px;  
+      font-size: 20px;  
+    }  
+      
+    .footer-section p, .footer-section a {  
+      color: rgba(255,255,255,0.8);  
+      margin-bottom: 10px;  
+      display: block;  
+      text-decoration: none;  
+    }  
+      
+    .footer-section a:hover {  
+      color: white;  
+    }  
+      
+    .copyright {  
+      margin-top: 30px;  
+      padding-top: 20px;  
+      border-top: 1px solid rgba(255,255,255,0.2);  
+      text-align: center;  
+    }  
+      
+    /* Responsive Design */  
+    @media (max-width: 768px) {  
+      header h1 {  
+        font-size: 26px;  
+      }  
         
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active');
-        });
+      nav .container {  
+        flex-direction: column;  
+      }  
         
-        // Tutup menu mobile saat mengklik link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.classList.remove('active');
-            });
-        });
-    </script>
-</body>
+      nav .nav-links {  
+        margin-top: 15px;  
+        flex-wrap: wrap;  
+        justify-content: center;  
+      }  
+        
+      nav a {  
+        margin: 5px;  
+      }  
+        
+      .products-grid {  
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  
+      }  
+    }  
+      
+    @media (max-width: 480px) {  
+      .products-grid {  
+        grid-template-columns: 1fr;  
+      }  
+        
+      section {  
+        padding: 30px 15px;  
+      }  
+    }  
+  </style>  
+</head>  
+<body>  
+  <header>  
+    <h1>📚 EbookMart.id</h1>  
+    <p>Situs Jual Ebook Digital Terpercaya</p>  
+  </header>  
+    
+  <nav>  
+    <div class="container">  
+      <div class="logo">EbookMart</div>  
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">☰</div>
+      <div class="nav-links"> 
+        <a href="#">Beranda</a>  
+        <a href="#">Katalog</a>  
+        <a href="#">Kategori</a>  
+        <a href="#" id="wishlistNav" style="position:relative;">
+          Wishlist <span class="wishlist-counter" id="wishlistCount">0</span>
+        </a>  
+        <a href="#">Kontak</a>  
+      </div>  
+    </div>  
+  </nav>  
+    
+  <section>  
+    <div class="container">  
+      <h2>Produk Terbaru</h2>  
+      <div class="products-grid">  
+        <div class="product" data-id="1">  
+          <button class="wishlist-btn" data-product="1">🤍</button>  
+          <div class="product-image">📖</div>  
+          <div class="product-content">  
+            <h3>Panduan Bisnis Online</h3>  
+            <p>Pelajari strategi sukses membangun bisnis digital dari nol hingga menghasilkan profit yang konsisten.</p>  
+            <div class="product-price">  
+              <span class="product-old-price">Rp 10.000</span>  
+              Rp 5.000  
+            </div>  
+            <a href="#" class="btn">Beli Sekarang</a>  
+          </div>  
+        </div>  
+          
+        <div class="product" data-id="2">  
+          <button class="wishlist-btn" data-product="2">🤍</button>  
+          <div class="product-image">💻</div>  
+          <div class="product-content">  
+            <h3>Mastering Web Development</h3>  
+            <p>Panduan lengkap untuk menjadi web developer profesional dengan teknologi terbaru.</p>  
+            <div class="product-price">  
+              <span class="product-old-price">Rp 10.000</span>  
+              Rp 5.000  
+            </div>  
+            <a href="#" class="btn">Beli Sekarang</a>  
+          </div>  
+        </div>  
+          
+        <div class="product" data-id="3">  
+          <button class="wishlist-btn" data-product="3">🤍</button>  
+          <div class="product-image">📊</div>  
+          <div class="product-content">  
+            <h3>Data Science untuk Pemula</h3>  
+            <p>Mulai karir di bidang data science dengan memahami konsep dasar dan tools yang digunakan.</p>  
+            <div class="product-price">  
+              <span class="product-old-price">Rp 10.000</span>  
+              Rp 5.000  
+            </div>  
+            <a href="#" class="btn">Beli Sekarang</a>  
+          </div>  
+        </div>  
+          
+        <div class="product" data-id="4">  
+          <button class="wishlist-btn" data-product="4">🤍</button>  
+          <div class="product-image">📱</div>  
+          <div class="product-content">  
+            <h3>Mobile App Development</h3>  
+            <p>Belajar membuat aplikasi mobile untuk iOS dan Android dengan framework populer.</p>  
+            <div class="product-price">  
+              <span class="product-old-price">Rp 10.000</span>  
+              Rp 5.000  
+            </div>  
+            <a href="#" class="btn">Beli Sekarang</a>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+    
+  <section style="background: #e9f2fa;">  
+    <div class="container">  
+      <h2>Kategori Populer</h2>  
+      <div class="products-grid">  
+        <div class="product">  
+          <div class="product-content" style="text-align: center;">  
+            <h3>Bisnis & Keuangan</h3>  
+            <p>Ebook tentang strategi bisnis, investasi, dan manajemen keuangan.</p>  
+            <a href="#" class="btn btn-outline">Jelajahi</a>  
+          </div>  
+        </div>  
+          
+        <div class="product">  
+          <div class="product-content" style="text-align: center;">  
+            <h3>Teknologi & Pemrograman</h3>  
+            <p>Panduan coding, web development, dan teknologi terkini.</p>  
+            <a href="#" class="btn btn-outline">Jelajahi</a>  
+          </div>  
+        </div>  
+          
+        <div class="product">  
+          <div class="product-content" style="text-align: center;">  
+            <h3>Pengembangan Diri</h3>  
+            <p>Ebook untuk meningkatkan skill dan produktivitas pribadi.</p>  
+            <a href="#" class="btn btn-outline">Jelajahi</a>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+    
+  <footer>  
+    <div class="footer-content">  
+      <div class="footer-section">  
+        <h3>EbookMart.id</h3>  
+        <p>Toko ebook digital terpercaya dengan koleksi lengkap dan harga terjangkau.</p>  
+      </div>  
+        
+      <div class="footer-section">  
+        <h3>Link Cepat</h3>  
+        <a href="#">Beranda</a>  
+        <a href="#">Katalog</a>  
+        <a href="#">Kategori</a>  
+        <a href="#">Tentang Kami</a>  
+        <a href="#">Kontak</a>  
+      </div>  
+        
+      <div class="footer-section">  
+        <h3>Kontak Kami</h3>  
+        <p>Email: info@ebookmart.id</p>  
+        <p>Telepon: (021) 1234-5678</p>  
+        <p>Alamat: Jl. Digital No. 123, Palangka Raya</p>  
+      </div>  
+    </div>  
+      
+    <div class="copyright">  
+      <p>&copy; 2023 EbookMart.id - All Rights Reserved</p>  
+    </div>  
+  </footer>  
+
+  <script>
+  // Wishlist Functionality
+  (function() {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const wishlistCount = document.getElementById('wishlistCount');
+    
+    function updateWishlistCounter() {
+      wishlistCount.textContent = wishlist.length;
+    }
+    
+    function toggleWishlist(productId) {
+      const index = wishlist.indexOf(productId);
+      
+      if (index === -1) {
+        // Add to wishlist
+        wishlist.push(productId);
+      } else {
+        // Remove from wishlist
+        wishlist.splice(index, 1);
+      }
+      
+      // Save to localStorage
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      updateWishlistCounter();
+      updateWishlistButtons();
+    }
+    
+    function updateWishlistButtons() {
+      document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        const productId = btn.dataset.product;
+        if (wishlist.includes(productId)) {
+          btn.textContent = '❤️';
+          btn.classList.add('active');
+        } else {
+          btn.textContent = '🤍';
+          btn.classList.remove('active');
+        }
+      });
+    }
+    
+    // Event listeners untuk wishlist buttons
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('wishlist-btn')) {
+        toggleWishlist(e.target.dataset.product);
+      }
+    });
+    
+    // Initialize
+    updateWishlistCounter();
+    updateWishlistButtons();
+  })();
+  </script>
+</body>  
 </html>
-```
