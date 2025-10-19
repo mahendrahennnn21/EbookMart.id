@@ -5,6 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
   <title>EbookMart.id - Jual Ebook Digital Terpercaya!</title>  
   <style> 
+    /* Tombol awalnya tidak muncul di layar besar */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Untuk layar kecil (HP) */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block; /* tombol ☰ muncul */
+  }
+
+  .nav-links {
+    display: none; /* menu disembunyikan */
+    flex-direction: column;
+    width: 100%;
+    background: #1a4d8f;
+    position: absolute;
+    top: 60px; /* di bawah navbar */
+    left: 0;
+    padding: 10px 0;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  /* Menu muncul saat tombol diklik */
+  .nav-links.active {
+    display: flex;
+  }
+}
     /* === Category List (tampilan kategori populer) === */
 .category-list {
   display: flex;
@@ -381,7 +418,12 @@
   <nav>  
     <div class="container">  
       <div class="logo">EbookMart</div>  
-      <div class="nav-links">  
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">☰</div>
+      <div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Cari ebook...">
+  <button id="searchBtn">🔍</button>
+</div>
+      <div class="nav-links"> 
         <a href="#">Beranda</a>  
         <a href="#">Katalog</a>  
         <a href="#">Kategori</a>  
@@ -568,5 +610,26 @@
     updateWishlistButtons();
   })();
   </script>
+  <!-- Script Wishlist (kalau ada) -->
+<script>
+  // wishlist code...
+</script>
+
+<!-- Script Mobile Menu -->
+<script>
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  mobileMenuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+  const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+
+searchBtn.addEventListener('click', () => {
+  const query = searchInput.value.trim().toLowerCase();
+  alert('Mencari ebook: ' + query);
+});
+</script>
 </body>  
 </html>
