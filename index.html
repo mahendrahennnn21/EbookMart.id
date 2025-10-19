@@ -605,6 +605,13 @@
     updateWishlistCounter();
     updateWishlistButtons();
   })();
+    / Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.querySelector('.nav-links');
+
+mobileMenuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
   </script>
 </body>  
 </html>
